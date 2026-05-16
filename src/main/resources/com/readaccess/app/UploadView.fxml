@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane fitToWidth="true" styleClass="scroll-pane"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.readaccess.app.UploadController">
+
+    <VBox spacing="20" styleClass="main-content">
+        <padding><Insets top="24" bottom="24" left="28" right="28"/></padding>
+
+        <!-- API info bar -->
+        <HBox styleClass="card" alignment="CENTER_LEFT" spacing="16">
+            <padding><Insets top="12" bottom="12" left="16" right="16"/></padding>
+            <VBox spacing="2" HBox.hgrow="ALWAYS">
+                <Label text="API ENDPOINT" styleClass="card-label"/>
+                <Label fx:id="lblApiInfo" text="—" styleClass="db-label"/>
+            </VBox>
+            <Button fx:id="btnApiConfig" text="Configure API" styleClass="btn-outline"
+                    onAction="#onApiConfig"/>
+        </HBox>
+
+        <!-- Exam type card -->
+        <VBox styleClass="card" spacing="10">
+            <Label text="EXAMINATION TYPE" styleClass="card-label"/>
+            <ComboBox fx:id="cbUploadExamType" promptText="Select exam type…"
+                      styleClass="combo-field" maxWidth="300"/>
+        </VBox>
+
+        <!-- Year + action card -->
+        <VBox styleClass="card" spacing="14">
+            <Label text="EXAM YEAR" styleClass="card-label"/>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <ComboBox fx:id="cbYear" promptText="Select year…"
+                          styleClass="combo-field" prefWidth="160"/>
+                <Label text="Year of exam results to upload" styleClass="app-subtitle"/>
+            </HBox>
+
+            <!-- Stats + progress -->
+            <HBox spacing="24" alignment="CENTER_LEFT">
+                <VBox spacing="4" alignment="CENTER">
+                    <Label text="PROCESSED" styleClass="stat-caption"/>
+                    <Label fx:id="lblUpProcessed" text="0" styleClass="stat-value"/>
+                </VBox>
+                <VBox spacing="4" alignment="CENTER">
+                    <Label text="SENT" styleClass="stat-caption"/>
+                    <Label fx:id="lblUpSent" text="0" styleClass="stat-value-green"/>
+                </VBox>
+                <VBox spacing="4" alignment="CENTER">
+                    <Label text="FAILED" styleClass="stat-caption"/>
+                    <Label fx:id="lblUpFailed" text="0" styleClass="stat-value-red"/>
+                </VBox>
+                <VBox HBox.hgrow="ALWAYS" spacing="4">
+                    <Label fx:id="lblUpStatus" text="Idle" styleClass="status-label"/>
+                    <ProgressBar fx:id="uploadProgressBar" progress="0"
+                                 maxWidth="Infinity" styleClass="prog-bar"/>
+                </VBox>
+            </HBox>
+
+            <HBox spacing="10">
+                <Button fx:id="btnUpload" text="Start Upload" styleClass="btn-primary"
+                        onAction="#onUpload" disable="true"/>
+                <Button fx:id="btnCancelUpload" text="Cancel" styleClass="btn-danger"
+                        onAction="#onCancelUpload" disable="true"/>
+                <Button fx:id="btnResetSent" text="Reset Sent Flag" styleClass="btn-outline"
+                        onAction="#onResetSent" disable="true"/>
+            </HBox>
+        </VBox>
+
+        <!-- Log -->
+        <VBox styleClass="card" spacing="8">
+            <HBox alignment="CENTER_LEFT" spacing="8">
+                <Label text="LOG OUTPUT" styleClass="card-label" HBox.hgrow="ALWAYS"/>
+                <Button fx:id="btnScrollLock" text="Lock Scroll" styleClass="btn-ghost"
+                        onAction="#onScrollLock"/>
+                <Button fx:id="btnClearUploadLog" text="Clear" styleClass="btn-ghost"
+                        onAction="#onClearUploadLog"/>
+            </HBox>
+            <TextArea fx:id="uploadLogArea" editable="false" wrapText="true"
+                      prefRowCount="12" styleClass="log-area"/>
+        </VBox>
+
+    </VBox>
+</ScrollPane>

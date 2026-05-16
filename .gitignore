@@ -1,0 +1,16 @@
+# Build output
+target/
+
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# Maven
+dependency-reduced-pom.xml
+
+# OS
+.DS_Store

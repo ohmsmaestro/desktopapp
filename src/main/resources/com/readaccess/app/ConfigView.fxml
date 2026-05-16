@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.readaccess.app.ConfigController"
+      styleClass="root-pane config-pane" spacing="0">
+
+    <!-- Dialog header -->
+    <HBox styleClass="config-header" alignment="CENTER_LEFT" spacing="10">
+        <padding><Insets top="20" bottom="20" left="24" right="24"/></padding>
+        <VBox spacing="2">
+            <Label text="Database Configuration" styleClass="config-title"/>
+            <Label text="PostgreSQL connection settings" styleClass="app-subtitle"/>
+        </VBox>
+    </HBox>
+
+    <Separator styleClass="sep"/>
+
+    <!-- Form -->
+    <VBox spacing="14">
+        <padding><Insets top="20" bottom="16" left="24" right="24"/></padding>
+
+        <HBox spacing="16">
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                <Label text="HOST" styleClass="field-label"/>
+                <TextField fx:id="tfHost" promptText="localhost" styleClass="field-input"/>
+            </VBox>
+            <VBox spacing="5" minWidth="100" maxWidth="100">
+                <Label text="PORT" styleClass="field-label"/>
+                <TextField fx:id="tfPort" promptText="5432" styleClass="field-input"/>
+            </VBox>
+        </HBox>
+
+        <VBox spacing="5">
+            <Label text="DATABASE NAME" styleClass="field-label"/>
+            <TextField fx:id="tfDatabase" promptText="my_database" styleClass="field-input"/>
+        </VBox>
+
+        <VBox spacing="5">
+            <Label text="USERNAME" styleClass="field-label"/>
+            <TextField fx:id="tfUsername" promptText="postgres" styleClass="field-input"/>
+        </VBox>
+
+        <VBox spacing="5">
+            <Label text="PASSWORD" styleClass="field-label"/>
+            <PasswordField fx:id="pfPassword" promptText="••••••••" styleClass="field-input"/>
+        </VBox>
+
+        <!-- Test result -->
+        <Label fx:id="lblTestResult" text="" styleClass="test-result" wrapText="true"/>
+    </VBox>
+
+    <Separator styleClass="sep"/>
+
+    <!-- Buttons — always visible at the bottom -->
+    <HBox spacing="10" alignment="CENTER_RIGHT" styleClass="config-btn-bar">
+        <padding><Insets top="14" bottom="14" left="24" right="24"/></padding>
+        <Button fx:id="btnTest" text="Test Connection" styleClass="btn-outline" onAction="#onTestConnection"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="btnCancel" text="Cancel" styleClass="btn-ghost" onAction="#onCancel"/>
+        <Button fx:id="btnSave" text="Save &amp; Close" styleClass="btn-save-prominent" onAction="#onSave"
+                defaultButton="true" minWidth="130"/>
+    </HBox>
+
+</VBox>

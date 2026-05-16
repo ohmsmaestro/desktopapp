@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.readaccess.app.MainController"
+            styleClass="root-pane">
+
+    <!-- ── Header ── -->
+    <top>
+        <HBox styleClass="header" alignment="CENTER_LEFT" spacing="12">
+            <padding><Insets top="18" bottom="18" left="28" right="28"/></padding>
+            <VBox spacing="2" HBox.hgrow="ALWAYS">
+                <Label text="ReadAccess Exam Importer" styleClass="app-title"/>
+                <Label text="Access → PostgreSQL → Server pipeline" styleClass="app-subtitle"/>
+            </VBox>
+            <VBox alignment="CENTER_RIGHT" spacing="2">
+                <Label text="DATABASE" styleClass="db-label-caption"/>
+                <Label fx:id="lblDbInfo" text="—" styleClass="db-label"/>
+            </VBox>
+            <Button fx:id="btnConfigure" text="Configure DB" styleClass="btn-outline"
+                    onAction="#onConfigure"/>
+        </HBox>
+    </top>
+
+    <!-- ── Tabs ── -->
+    <center>
+        <TabPane fx:id="tabPane" styleClass="main-tab-pane" tabClosingPolicy="UNAVAILABLE">
+
+            <!-- Tab 1: Import Access → PostgreSQL -->
+            <Tab text="Import  (Access → PostgreSQL)" styleClass="main-tab">
+                <ScrollPane fitToWidth="true" styleClass="scroll-pane">
+                    <VBox spacing="20" styleClass="main-content">
+                        <padding><Insets top="24" bottom="24" left="28" right="28"/></padding>
+
+                        <!-- Drop zone -->
+                        <VBox styleClass="card" spacing="0">
+                            <Label text="ACCESS FILE" styleClass="card-label"/>
+                            <HBox fx:id="dropZone" styleClass="drop-zone drop-zone-empty"
+                                  alignment="CENTER" spacing="12" onMouseClicked="#onBrowseFile">
+                                <padding><Insets top="28" bottom="28" left="20" right="20"/></padding>
+                                <Label text="⬆" styleClass="drop-icon"/>
+                                <VBox spacing="3">
+                                    <Label fx:id="fileLabel" text="Drop .accdb / .mdb here or click to browse"
+                                           styleClass="drop-hint"/>
+                                    <Label text=".accdb and .mdb formats supported" styleClass="drop-sub"/>
+                                </VBox>
+                            </HBox>
+                        </VBox>
+
+                        <!-- Exam type -->
+                        <VBox styleClass="card" spacing="10">
+                            <Label text="EXAMINATION TYPE" styleClass="card-label"/>
+                            <ComboBox fx:id="cbExamType" promptText="Select exam type…"
+                                      styleClass="combo-field" maxWidth="300"/>
+                        </VBox>
+
+                        <!-- Progress -->
+                        <VBox styleClass="card" spacing="12">
+                            <Label text="PROGRESS" styleClass="card-label"/>
+                            <HBox spacing="24" alignment="CENTER_LEFT">
+                                <VBox spacing="4" alignment="CENTER">
+                                    <Label text="PROCESSED" styleClass="stat-caption"/>
+                                    <Label fx:id="lblProcessed" text="0" styleClass="stat-value"/>
+                                </VBox>
+                                <VBox spacing="4" alignment="CENTER">
+                                    <Label text="UPLOADED" styleClass="stat-caption"/>
+                                    <Label fx:id="lblUploaded" text="0" styleClass="stat-value"/>
+                                </VBox>
+                                <VBox HBox.hgrow="ALWAYS" spacing="4">
+                                    <Label fx:id="lblStatus" text="Idle" styleClass="status-label"/>
+                                    <ProgressBar fx:id="progressBar" progress="0"
+                                                 maxWidth="Infinity" styleClass="prog-bar"/>
+                                </VBox>
+                            </HBox>
+                            <HBox spacing="10">
+                                <Button fx:id="btnImport" text="Start Import" styleClass="btn-primary"
+                                        onAction="#onImport" disable="true"/>
+                                <Button fx:id="btnCancel" text="Cancel" styleClass="btn-danger"
+                                        onAction="#onCancel" disable="true"/>
+                            </HBox>
+                        </VBox>
+
+                        <!-- Log -->
+                        <VBox styleClass="card" spacing="8">
+                            <HBox alignment="CENTER_LEFT" spacing="8">
+                                <Label text="LOG OUTPUT" styleClass="card-label" HBox.hgrow="ALWAYS"/>
+                                <Button fx:id="btnClearLog" text="Clear" styleClass="btn-ghost"
+                                        onAction="#onClearLog"/>
+                            </HBox>
+                            <TextArea fx:id="logArea" editable="false" wrapText="true"
+                                      prefRowCount="12" styleClass="log-area"/>
+                        </VBox>
+
+                    </VBox>
+                </ScrollPane>
+            </Tab>
+
+            <!-- Tab 2: Upload PostgreSQL → Server -->
+            <Tab text="Upload  (PostgreSQL → Server)" styleClass="main-tab">
+                <fx:include fx:id="uploadTab" source="UploadView.fxml"/>
+            </Tab>
+
+        </TabPane>
+    </center>
+
+    <!-- ── Footer ── -->
+    <bottom>
+        <HBox styleClass="footer" alignment="CENTER_RIGHT" spacing="8">
+            <padding><Insets top="8" bottom="8" left="24" right="24"/></padding>
+            <Label text="ReadAccess Exam Importer v1.0" styleClass="footer-text"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

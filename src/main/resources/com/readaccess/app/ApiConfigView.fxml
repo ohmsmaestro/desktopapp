@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.readaccess.app.ApiConfigController"
+      styleClass="root-pane config-pane" spacing="0">
+
+    <HBox styleClass="config-header" alignment="CENTER_LEFT" spacing="10">
+        <padding><Insets top="20" bottom="20" left="24" right="24"/></padding>
+        <VBox spacing="2">
+            <Label text="API Configuration" styleClass="config-title"/>
+            <Label text="Remote server upload settings" styleClass="app-subtitle"/>
+        </VBox>
+    </HBox>
+
+    <Separator styleClass="sep"/>
+
+    <VBox spacing="14" VBox.vgrow="ALWAYS">
+        <padding><Insets top="20" bottom="16" left="24" right="24"/></padding>
+
+        <VBox spacing="5">
+            <Label text="ENDPOINT URL" styleClass="field-label"/>
+            <TextField fx:id="tfEndpointUrl"
+                       promptText="https://result.api.neco.gov.ng/api/result-upload/"
+                       styleClass="field-input"/>
+        </VBox>
+
+        <HBox spacing="16">
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                <Label text="BATCH SIZE" styleClass="field-label"/>
+                <TextField fx:id="tfBatchSize" promptText="1000" styleClass="field-input"/>
+            </VBox>
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                <Label text="MAX RETRIES" styleClass="field-label"/>
+                <TextField fx:id="tfMaxRetries" promptText="3" styleClass="field-input"/>
+            </VBox>
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                <Label text="PARALLEL THREADS" styleClass="field-label"/>
+                <TextField fx:id="tfParallelThreads" promptText="8" styleClass="field-input"/>
+            </VBox>
+        </HBox>
+
+        <HBox spacing="16">
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                <Label text="CONNECT TIMEOUT (s)" styleClass="field-label"/>
+                <TextField fx:id="tfConnTimeout" promptText="30" styleClass="field-input"/>
+            </VBox>
+            <VBox spacing="5" HBox.hgrow="ALWAYS">
+                <Label text="READ TIMEOUT (s)" styleClass="field-label"/>
+                <TextField fx:id="tfReadTimeout" promptText="60" styleClass="field-input"/>
+            </VBox>
+        </HBox>
+
+        <Label fx:id="lblError" text="" styleClass="test-fail" wrapText="true"/>
+    </VBox>
+
+    <Separator styleClass="sep"/>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT" styleClass="config-btn-bar">
+        <padding><Insets top="14" bottom="14" left="24" right="24"/></padding>
+        <Button fx:id="btnCancel" text="Cancel" styleClass="btn-ghost" onAction="#onCancel"/>
+        <Button fx:id="btnSave" text="Save &amp; Close" styleClass="btn-save-prominent"
+                onAction="#onSave" defaultButton="true" minWidth="130"/>
+    </HBox>
+
+</VBox>
